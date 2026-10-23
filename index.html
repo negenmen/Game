@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#246b43">
+<title>Зелёный край — ферма онлайн</title>
+<style>
+  :root{--bg:#f2f6ed;--card:#fffdf8;--ink:#25382b;--muted:#728073;--green:#267447;--green2:#3e9a5f;--pale:#e5f4df;--line:#e2e9dc;--gold:#e7ae31;--shadow:0 12px 32px rgba(45,74,47,.08)}
+  *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px}button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.52}button:focus-visible,input:focus-visible{outline:3px solid #8dc99b;outline-offset:2px}
+  .hidden{display:none!important}.screen{min-height:100vh}.auth-screen{display:grid;place-items:center;padding:28px 18px;overflow:hidden;position:relative;background:radial-gradient(ellipse at 15% 15%,#dbeed3 0,transparent 37%),radial-gradient(ellipse at 90% 80%,#d3e9c9 0,transparent 34%),linear-gradient(135deg,#f4f8ee,#eaf3e5)}
+  .auth-screen:before,.auth-screen:after{content:"";position:absolute;border-radius:50%;border:1px solid rgba(38,116,71,.12);width:430px;height:430px;pointer-events:none}.auth-screen:before{left:-230px;bottom:-180px}.auth-screen:after{right:-230px;top:-210px;width:520px;height:520px}
+  .auth-layout{width:min(1040px,100%);display:grid;grid-template-columns:1.1fr .9fr;gap:46px;align-items:center;position:relative;z-index:1}.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:-.04em;font-size:20px}.brand-mark{display:grid;place-items:center;width:44px;height:44px;border-radius:15px;background:var(--green);color:white;font-size:25px;box-shadow:0 8px 20px #26744733}.hero-copy .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;margin:30px 0 14px;border:1px solid #d5e7d0;background:#ffffff9c;color:var(--green);font-size:11px;font-weight:850;letter-spacing:.1em;border-radius:999px}.hero-copy h1{margin:0;max-width:540px;font-size:clamp(42px,6vw,68px);line-height:1.02;letter-spacing:-.065em}.hero-copy h1 span{color:var(--green2)}.hero-copy p{color:#657769;font-size:16px;line-height:1.7;max-width:480px}.feature-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}.feature-chip{display:flex;align-items:center;gap:9px;padding:11px 13px;background:#ffffffa8;border:1px solid #dfebd9;border-radius:14px;font-weight:750;font-size:12px}
+  .auth-card{background:rgba(255,253,248,.94);border:1px solid #e2ebdd;border-radius:26px;padding:30px;box-shadow:0 28px 80px rgba(39,84,45,.14)}.auth-card .card-icon{width:58px;height:58px;display:grid;place-items:center;background:var(--pale);border-radius:19px;font-size:30px;margin-bottom:20px}.auth-card h2{margin:0 0 8px;font-size:27px;letter-spacing:-.04em}.auth-card .sub{margin:0 0 24px;color:var(--muted);line-height:1.6}.field-label{display:block;margin:0 0 8px;font-size:12px;font-weight:800;color:#516452}.text-input{width:100%;height:50px;border:1px solid #dce6d8;background:#fff;border-radius:13px;padding:0 14px;color:var(--ink);outline:none}.text-input:focus{border-color:#7eb88c;box-shadow:0 0 0 4px #70b78020}.btn{border:0;border-radius:13px;padding:12px 16px;font-weight:850;transition:transform .15s,background .15s;display:inline-flex;gap:8px;align-items:center;justify-content:center}.btn:hover:not(:disabled){transform:translateY(-1px)}.btn-primary{color:white;background:var(--green);box-shadow:0 6px 15px #26744724}.btn-primary:hover:not(:disabled){background:#1e6339}.btn-soft{background:#eaf5e5;color:var(--green)}.btn-outline{border:1px solid var(--line);background:#fff;color:var(--ink)}.btn-gold{background:#fff1c7;color:#845b05}.btn-full{width:100%;margin-top:14px;min-height:48px}.microcopy{font-size:11px;color:#839083;line-height:1.55;margin:16px 0 0}.connection-note{display:flex;align-items:center;gap:8px;margin-top:18px;padding:10px 12px;background:#f3f7ef;border-radius:11px;color:#627260;font-size:11px;line-height:1.4}.dot{width:8px;height:8px;flex:none;border-radius:50%;background:#e7ad35}.dot.good{background:#36a866;box-shadow:0 0 0 4px #36a86619}.dot.bad{background:#d17d52}
+  .setup-wrap{width:min(560px,100%);position:relative;z-index:1}.setup-card{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:34px;box-shadow:var(--shadow)}.setup-card h1{font-size:32px;letter-spacing:-.05em;margin:24px 0 8px}.setup-card p{color:var(--muted);line-height:1.65}.setup-art{min-height:145px;border-radius:18px;background:linear-gradient(130deg,#d9efcb,#f2f9e9);display:grid;place-items:center;font-size:70px;margin:24px 0;position:relative;overflow:hidden}.setup-art:before,.setup-art:after{content:"";position:absolute;height:35px;left:-8%;right:-8%;bottom:14px;border-radius:50%;background:#7ebd6a55;transform:rotate(-5deg)}.setup-art:after{bottom:-2px;background:#5c9f4c45;transform:rotate(4deg)}.setup-art span{position:relative;z-index:1;filter:drop-shadow(0 7px 5px #476f2633)}
+  .topbar{height:76px;position:sticky;top:0;z-index:20;background:#fffdf8ee;backdrop-filter:blur(16px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,3vw,40px);gap:18px}.topbar .brand{font-size:18px;white-space:nowrap}.topbar .brand-mark{width:38px;height:38px;border-radius:13px;font-size:21px}.topbar-right{display:flex;align-items:center;gap:12px}.server-status{display:flex;align-items:center;gap:8px;padding:8px 11px;border-radius:999px;background:#f2f7ed;color:#506c53;font-size:11px;font-weight:800;white-space:nowrap}.resource-pill{display:flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 11px;font-size:12px;font-weight:900;white-space:nowrap}.avatar{width:34px;height:34px;border-radius:12px;background:#ffe7b2;display:grid;place-items:center;font-size:17px}.account-mini{display:flex;gap:9px;align-items:center}.account-mini strong{display:block;font-size:12px;max-width:120px;overflow:hidden;text-overflow:ellipsis}.account-mini small{display:block;color:var(--muted);font-size:10px;margin-top:2px}.logout{border:0;background:transparent;color:#879284;padding:9px;border-radius:9px}.logout:hover{background:#f1f4ed;color:#b05641}
+  .game-shell{max-width:1550px;margin:0 auto;padding:25px clamp(12px,2.4vw,32px) 50px;display:grid;grid-template-columns:218px minmax(0,1fr) 255px;gap:22px;align-items:start}.sidebar,.rightbar{min-width:0}.sidebar{position:sticky;top:98px}.farm-id-card{background:linear-gradient(145deg,#267447,#1e5d38);color:white;border-radius:20px;padding:19px;margin-bottom:18px;position:relative;overflow:hidden}.farm-id-card:after{content:"🌿";position:absolute;right:-2px;bottom:-10px;font-size:64px;opacity:.17;transform:rotate(-14deg)}.farm-id-card .farm-label{font-size:10px;letter-spacing:.13em;opacity:.72;font-weight:800}.farm-id-card h3{font-size:19px;line-height:1.15;margin:9px 0 8px;overflow-wrap:anywhere}.farm-id-card p{font-size:11px;opacity:.75;margin:0}.level-line{height:5px;background:#ffffff40;border-radius:999px;margin-top:16px;overflow:hidden}.level-line span{height:100%;display:block;background:#ffda78;border-radius:999px}.level-info{display:flex;justify-content:space-between;font-size:10px;margin-top:7px;opacity:.9}.nav-label{font-size:10px;letter-spacing:.13em;color:#899687;font-weight:900;padding:10px 12px}.nav-list{display:grid;gap:5px}.nav-item{border:0;background:transparent;color:#6d7b6b;display:flex;align-items:center;gap:12px;width:100%;padding:12px;border-radius:13px;text-align:left;font-weight:800;font-size:12px}.nav-item .nav-ico{width:28px;height:28px;display:grid;place-items:center;border-radius:9px;background:#e7eee1;font-size:16px}.nav-item.active{background:white;color:var(--green);box-shadow:0 4px 15px #294d2810}.nav-item.active .nav-ico{background:#e0f1d8}.sidebar-footer{margin-top:24px;padding:14px 12px;color:#849080;font-size:10px;line-height:1.65;border-top:1px solid #e1e8db}
+  .main-content{min-width:0}.page{display:none}.page.active{display:block;animation:fadein .2s ease}@keyframes fadein{from{opacity:.5;transform:translateY(3px)}to{opacity:1;transform:none}}.welcome-strip{background:linear-gradient(115deg,#e2f2d8,#f7f9e9);border:1px solid #dcebd2;border-radius:19px;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:21px;overflow:hidden;position:relative}.welcome-strip h2{margin:0 0 6px;font-size:20px;letter-spacing:-.04em}.welcome-strip p{margin:0;color:#687a66;font-size:12px;line-height:1.5}.sun-illu{font-size:46px;min-width:58px;text-align:center}.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:24px 0 15px}.section-head h2{margin:0;font-size:23px;letter-spacing:-.05em}.section-head p{margin:5px 0 0;color:var(--muted);font-size:12px}.section-kicker{font-size:10px;color:var(--green);font-weight:900;letter-spacing:.13em;margin-bottom:7px}.seed-picker{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px}.seed-choice{display:flex;align-items:center;gap:7px;padding:9px 12px;border:1px solid #dfe8d8;border-radius:12px;background:#fff;color:#62725f;font-size:11px;font-weight:800}.seed-choice.selected{border-color:#6dad7b;background:#e8f5e2;color:var(--green);box-shadow:0 0 0 2px #72b88018}.seed-choice .seed-count{display:inline-grid;place-items:center;min-width:20px;height:20px;background:#edf1e9;border-radius:7px;font-size:10px}.seed-choice.selected .seed-count{background:#d4eccb}
+  .field-board{padding:15px;background:#dce8cf;border:1px solid #ccdcbf;border-radius:21px;box-shadow:inset 0 2px 0 #ffffffa1}.board-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 3px 13px}.board-top strong{font-size:12px}.board-top span{font-size:10px;color:#6a8064}.plots-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.plot{height:130px;position:relative;border:1px solid #adbd99;border-radius:14px;overflow:hidden;padding:10px 6px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:#fffdf0;background:linear-gradient(160deg,#936e47,#775438);box-shadow:inset 0 2px 0 #ffffff35,0 3px 0 #b5c7a8;min-width:0}.plot:before{content:"";position:absolute;inset:6px;border:1px dashed #ffffff32;border-radius:9px;pointer-events:none}.plot:after{content:"";position:absolute;left:0;right:0;bottom:0;height:9px;background:#5c402e55;pointer-events:none}.plot:hover:not(:disabled){filter:brightness(1.07);transform:translateY(-1px)}.plot.empty{background:linear-gradient(160deg,#a9855b,#896542)}.plot.locked{background:#bcc6ae;color:#697762;border-color:#a8b59b;box-shadow:none}.plot.ready{background:linear-gradient(150deg,#65a85c,#367b43);border-color:#438848;box-shadow:inset 0 2px 0 #ffffff45,0 3px 0 #a1c398}.plot .plant{font-size:32px;line-height:1.1;filter:drop-shadow(0 3px 1px #302c1a32);position:relative;z-index:1}.plot .plot-title{font-size:10px;font-weight:900;position:relative;z-index:1;text-shadow:0 1px 2px #47311e65;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.plot .plot-help{font-size:9px;opacity:.85;position:relative;z-index:1}.plot .progress{height:5px;background:#3e4b2e66;border-radius:999px;width:80%;overflow:hidden;position:relative;z-index:1;margin-top:1px}.plot .progress span{height:100%;display:block;background:#fae1a1;border-radius:999px}.plot.locked .plot-title{text-shadow:none}.plot.locked .plot-help{opacity:1}.board-legend{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 5px 2px;font-size:10px;color:#61755e}.legend-items{display:flex;gap:12px;flex-wrap:wrap}.legend-items span{display:flex;align-items:center;gap:5px}.legend-dot{width:7px;height:7px;border-radius:3px;background:#9a764f}.legend-dot.ready{background:#55a451}.legend-dot.locked{background:#adb9a0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 5px 22px #294d2807}.card h3{margin:0;font-size:14px;letter-spacing:-.02em}.card-sub{font-size:11px;color:var(--muted);line-height:1.5;margin:6px 0 0}.rightbar .card{margin-bottom:14px}.weather-card{background:linear-gradient(145deg,#fff8df,#fffdf6);border-color:#f0e8c8}.weather-top{display:flex;align-items:center;justify-content:space-between}.weather-emoji{font-size:32px}.weather-meta{display:flex;align-items:center;gap:9px}.weather-meta strong{font-size:22px;letter-spacing:-.05em}.weather-meta small{display:block;color:#917d43;font-size:10px}.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.stat-box{padding:11px;border:1px solid var(--line);background:#fff;border-radius:12px}.stat-box span{display:block;color:#849080;font-size:10px}.stat-box strong{display:block;font-size:19px;margin-top:5px;letter-spacing:-.04em}.small-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}.text-link{border:0;background:none;color:var(--green);font-size:10px;font-weight:900;padding:4px}.mini-quest{padding:11px 0;border-top:1px solid #edf0e8}.mini-quest:first-of-type{border-top:0}.mini-quest strong{font-size:11px;display:flex;justify-content:space-between;gap:8px}.mini-quest small{display:block;margin-top:5px;color:#859081;font-size:10px}.mini-progress{height:5px;background:#edf1e9;border-radius:99px;overflow:hidden;margin-top:8px}.mini-progress span{height:100%;display:block;background:#73b36d;border-radius:99px}.mini-online{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid #edf0e8}.mini-online:first-of-type{border-top:0}.online-avatar{width:34px;height:34px;border-radius:12px;background:#e7f1dc;display:grid;place-items:center;font-size:17px;flex:none}.mini-online-name{min-width:0;flex:1}.mini-online-name strong{font-size:11px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mini-online-name small{font-size:10px;color:#879282;display:block;margin-top:3px}.tiny-dot{width:7px;height:7px;border-radius:50%;background:#3cad69;box-shadow:0 0 0 3px #3cad691a}
+  .page-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin:5px 0 22px}.page-title-row h1{font-size:29px;letter-spacing:-.06em;margin:0}.page-title-row p{color:var(--muted);font-size:12px;margin:7px 0 0;line-height:1.55}.market-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.market-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px;position:relative;overflow:hidden}.market-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}.crop-visual{width:58px;height:58px;border-radius:17px;background:#eaf4e1;display:grid;place-items:center;font-size:32px}.crop-name{font-weight:900;font-size:15px;margin:13px 0 5px}.crop-desc{font-size:11px;line-height:1.45;color:var(--muted);min-height:31px}.crop-stats{display:flex;justify-content:space-between;gap:8px;margin:15px 0;padding:11px 0;border-top:1px solid #edf0e8;border-bottom:1px solid #edf0e8}.crop-stats span{font-size:10px;color:#869181}.crop-stats strong{display:block;color:var(--ink);font-size:12px;margin-top:4px}.market-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}.owned-label{color:#879282;font-size:10px}.market-bottom .btn{padding:10px 12px;font-size:11px}.quest-list{display:grid;gap:12px}.quest-card{display:grid;grid-template-columns:50px minmax(0,1fr) auto;gap:15px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:17px;padding:16px}.quest-emoji{width:50px;height:50px;display:grid;place-items:center;border-radius:15px;background:#edf5e6;font-size:25px}.quest-info h3{font-size:13px;margin:0 0 5px}.quest-info p{font-size:11px;color:var(--muted);margin:0 0 10px}.quest-meta{display:flex;justify-content:space-between;gap:12px;font-size:10px;color:#849080}.quest-card .btn{font-size:11px;padding:10px 12px;min-width:98px}.quest-card .btn:disabled{opacity:.55}.online-list{display:grid;gap:10px}.player-row{display:flex;align-items:center;gap:12px;padding:13px;background:var(--card);border:1px solid var(--line);border-radius:15px}.player-row .online-avatar{width:44px;height:44px;border-radius:14px}.player-row .mini-online-name strong{font-size:12px}.player-row .mini-online-name small{font-size:10px;line-height:1.45}.player-row .btn{padding:9px 12px;font-size:11px}
+  .empty-state{padding:34px 18px;text-align:center;background:#fffdf8;border:1px dashed #d4e0cb;border-radius:17px}.empty-state .big{font-size:35px}.empty-state h3{margin:12px 0 6px}.empty-state p{color:var(--muted);max-width:380px;margin:0 auto 15px;line-height:1.6;font-size:12px}.warning-banner{padding:13px 15px;background:#fff2d5;border:1px solid #f1dba4;color:#755b19;border-radius:13px;font-size:11px;line-height:1.6;margin-bottom:17px}.warning-banner strong{display:block;margin-bottom:3px}.toast-container{position:fixed;right:18px;bottom:18px;z-index:60;display:grid;gap:9px;width:min(350px,calc(100vw - 36px));pointer-events:none}.toast{background:#253b2b;color:white;border-radius:13px;padding:13px 15px;box-shadow:0 9px 28px #17341e30;font-size:12px;line-height:1.5;animation:toastin .2s ease}.toast.error{background:#75472f}.toast.success{background:#246b43}@keyframes toastin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .modal-backdrop{position:fixed;inset:0;background:#1426179c;backdrop-filter:blur(5px);display:grid;place-items:center;z-index:50;padding:18px}.modal{width:min(620px,100%);max-height:min(88vh,800px);overflow:auto;background:#fffdf8;border:1px solid #e0e7d8;border-radius:23px;padding:22px;box-shadow:0 30px 100px #10291442}.modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.modal-head h2{margin:0;font-size:23px;letter-spacing:-.05em}.modal-head p{margin:6px 0 0;color:var(--muted);font-size:11px}.close-modal{border:0;border-radius:10px;background:#edf2e8;width:34px;height:34px;font-size:20px;color:#60705d}.visitor-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:20px}.visitor-plot{border-radius:12px;background:#906e4b;min-height:74px;display:grid;place-items:center;align-content:center;gap:3px;color:white;border:1px solid #7c5b3b}.visitor-plot span{font-size:25px}.visitor-plot small{font-size:9px;opacity:.9}.visitor-plot.ready{background:#55934a}.visitor-plot.empty{background:#a7b796;color:#53644c}.modal-foot{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}
+  @media(max-width:1200px){.game-shell{grid-template-columns:190px minmax(0,1fr)}.rightbar{display:none}.topbar{padding-inline:18px}.plots-grid{gap:7px}.plot{height:120px}}
+  @media(max-width:800px){.auth-layout{grid-template-columns:1fr;max-width:480px;gap:24px}.hero-copy .eyebrow{margin-top:22px}.hero-copy h1{font-size:48px}.hero-copy p{font-size:14px}.feature-row{margin-top:17px}.feature-chip{padding:8px 10px}.auth-card{padding:24px}.topbar{height:65px}.topbar .brand-text{display:none}.topbar-right{gap:6px}.server-status{font-size:0;padding:9px}.server-status .status-label{display:none}.resource-pill{padding:8px;font-size:11px}.account-mini .identity{display:none}.logout{padding:6px}.game-shell{grid-template-columns:1fr;padding:14px 12px 34px;gap:14px}.sidebar{position:static}.farm-id-card{display:none}.nav-label,.sidebar-footer{display:none}.nav-list{display:flex;overflow:auto;gap:6px;padding:3px 0 7px}.nav-item{width:auto;min-width:max-content;gap:7px;padding:8px 10px;background:#ffffff8a;border:1px solid #e2e9dc}.nav-item .nav-ico{width:25px;height:25px}.welcome-strip{padding:15px 17px}.welcome-strip h2{font-size:18px}.sun-illu{font-size:35px;min-width:40px}.section-head h2{font-size:21px}.plot{height:111px}.plots-grid{gap:7px}.board-legend{align-items:flex-start;flex-direction:column}.quest-card{grid-template-columns:44px minmax(0,1fr);gap:12px}.quest-emoji{width:44px;height:44px}.quest-card .btn{grid-column:2;justify-self:start}.market-grid{gap:9px}.market-card{padding:13px}.crop-visual{width:50px;height:50px}.page-title-row h1{font-size:25px}}
+  @media(max-width:430px){.hero-copy h1{font-size:42px}.auth-card{padding:20px}.plots-grid{gap:5px}.plot{height:98px;padding:6px 3px}.plot .plant{font-size:25px}.plot .plot-title{font-size:9px}.plot .plot-help{font-size:8px}.field-board{padding:10px}.seed-choice{padding:8px}.market-grid{grid-template-columns:1fr}.page-title-row{display:block}.page-title-row>.btn{margin-top:12px}.visitor-grid{gap:5px}.visitor-plot{min-height:65px}}
+</style>
+</head>
+<body>
+<section id="loginScreen" class="screen auth-screen">
+  <div class="auth-layout">
+    <div class="hero-copy">
+      <div class="brand"><div class="brand-mark">🌱</div><span>ЗЕЛЁНЫЙ КРАЙ</span></div>
+      <div class="eyebrow">✦ ТВОЯ ФЕРМА · ТВОИ ПРАВИЛА</div>
+      <h1>Выращивай<br>свой <span>маленький мир.</span></h1>
+      <p>Сажай семена, собирай урожай, развивай хозяйство и заглядывай на фермы других игроков. Даже когда ты ушёл, твои растения продолжают расти.</p>
+      <div class="feature-row"><div class="feature-chip">🌾 Урожай и рынок</div><div class="feature-chip">🏡 Своя ферма</div><div class="feature-chip">🌐 Игроки онлайн</div></div>
+    </div>
+    <div class="auth-card">
+      <div class="card-icon">🧑‍🌾</div>
+      <h2>Войти на ферму</h2>
+      <p class="sub">Придумай ник — и начинай своё приключение.</p>
+      <form id="loginForm">
+        <label class="field-label" for="nicknameInput">ТВОЙ НИКНЕЙМ</label>
+        <input id="nicknameInput" class="text-input" maxlength="16" minlength="3" autocomplete="nickname" placeholder="Например, GreenFox" required>
+        <button class="btn btn-primary btn-full" type="submit">Продолжить <span>→</span></button>
+      </form>
+      <div class="connection-note"><span class="dot" id="loginDot"></span><span id="connectionText">Проверяем соединение с сервером…</span></div>
+      <p class="microcopy">Вход по нику без пароля — это демо-авторизация. Не используй здесь ник, который нужно защищать. Для настоящей публичной игры подключи Firebase Authentication и правила доступа.</p>
+    </div>
+  </div>
+</section>
+
+<section id="setupScreen" class="screen auth-screen hidden">
+  <div class="setup-wrap">
+    <div class="brand"><div class="brand-mark">🌱</div><span>ЗЕЛЁНЫЙ КРАЙ</span></div>
+    <div class="setup-card">
+      <div class="setup-art"><span>🏡</span></div>
+      <div class="section-kicker">НОВАЯ ГЛАВА</div>
+      <h1>Добро пожаловать, <span id="setupNick">фермер</span>!</h1>
+      <p>Здесь пока чистое поле, пара инструментов и целая куча возможностей. Дай ферме имя и заложи первый урожай.</p>
+      <form id="createFarmForm">
+        <label for="farmNameInput" class="field-label">КАК НАЗОВЁМ ФЕРМУ?</label>
+        <input id="farmNameInput" class="text-input" maxlength="28" placeholder="Например, Зелёная долина" required>
+        <button type="submit" class="btn btn-primary btn-full">🏡 Основать ферму</button>
+      </form>
+      <button id="backToLogin" class="btn btn-outline btn-full">← Вернуться ко входу</button>
+    </div>
+  </div>
+</section>
+
+<section id="gameScreen" class="screen hidden">
+  <header class="topbar">
+    <div class="brand"><div class="brand-mark">🌱</div><span class="brand-text">ЗЕЛЁНЫЙ КРАЙ</span></div>
+    <div class="topbar-right">
+      <div id="serverPill" class="server-status"><span class="dot" id="serverDot"></span><span class="status-label" id="serverLabel">Соединяемся…</span></div>
+      <div class="resource-pill"><span>🪙</span><span id="coinCount">0</span></div>
+      <div class="resource-pill"><span>⭐</span><span id="levelCount">1 ур.</span></div>
+      <div class="account-mini"><div class="avatar">🧑‍🌾</div><div class="identity"><strong id="headerNick">Фермер</strong><small>Хозяин фермы</small></div></div>
+      <button class="logout" id="logoutBtn" title="Выйти" aria-label="Выйти">↪</button>
+    </div>
+  </header>
+  <div class="game-shell">
+    <aside class="sidebar">
+      <div class="farm-id-card"><div class="farm-label">ТВОЁ ХОЗЯЙСТВО</div><h3 id="sidebarFarmName">Зелёная долина</h3><p id="sidebarFarmOwner">Ферма игрока</p><div class="level-line"><span id="sidebarXpBar" style="width:0%"></span></div><div class="level-info"><span id="sidebarLevel">Уровень 1</span><span id="sidebarXp">0 / 100 XP</span></div></div>
+      <div class="nav-label">МЕНЮ ФЕРМЕРА</div>
+      <nav class="nav-list" aria-label="Основное меню">
+        <button class="nav-item active" data-tab="farm"><span class="nav-ico">🌱</span>Моя ферма</button>
+        <button class="nav-item" data-tab="market"><span class="nav-ico">🧺</span>Магазин</button>
+        <button class="nav-item" data-tab="quests"><span class="nav-ico">📋</span>Задания</button>
+        <button class="nav-item" data-tab="neighbours"><span class="nav-ico">🌐</span>Соседи <span id="navOnlineCount" style="margin-left:auto;color:#4b9b5d"></span></button>
+      </nav>
+      <div class="sidebar-footer">🌿 Береги почву, собирай урожай вовремя и расширяй свою ферму. Каждая грядка — шаг к большому хозяйству.</div>
+    </aside>
+
+    <main class="main-content">
+      <div id="syncWarning" class="warning-banner hidden"><strong>⚠️ Онлайн-синхронизация выключена</strong><span id="syncWarningText">Игра работает локально на этом устройстве. Проверь правила доступа Firebase Realtime Database.</span></div>
+      <section id="page-farm" class="page active">
+        <div class="welcome-strip"><div><div class="section-kicker">ХОРОШИЙ ДЕНЬ ДЛЯ УРОЖАЯ</div><h2 id="welcomeTitle">Привет, фермер!</h2><p id="welcomeSubtitle">Твои грядки ждут заботы. Что посадим сегодня?</p></div><div class="sun-illu">🌤️</div></div>
+        <div class="section-head" style="margin-top:0"><div><div class="section-kicker">ТВОИ УГОДЬЯ</div><h2 id="farmTitle">Моя ферма</h2><p>Выбери семена, затем нажми на свободную грядку.</p></div><button id="dailyBonusBtn" class="btn btn-gold">🎁 Бонус дня</button></div>
+        <div id="dailyBonusNote" class="card-sub" style="margin:-5px 0 13px"></div>
+        <div id="seedPicker" class="seed-picker"></div>
+        <div class="field-board"><div class="board-top"><strong>🌱 Поле урожая</strong><span id="plotCountLabel">6 из 12 грядок открыто</span></div><div id="plotsGrid" class="plots-grid"></div><div class="board-legend"><div class="legend-items"><span><i class="legend-dot"></i> Свободно</span><span><i class="legend-dot ready"></i> Можно собрать</span><span><i class="legend-dot locked"></i> Закрыто</span></div><span>💡 Растения растут, пока тебя нет</span></div></div>
+        <div class="section-head"><div><div class="section-kicker">МАЛЕНЬКИЙ ШАГ — БОЛЬШОЙ УРОЖАЙ</div><h2>Начни с простого</h2><p>Первые грядки помогут заработать на новые семена.</p></div></div>
+        <div class="card"><div style="display:flex;gap:13px;align-items:center"><div style="font-size:30px">🥕</div><div style="flex:1"><h3>Морковь — твой первый заработок</h3><p class="card-sub">Стоит недорого, растёт быстро и отлично подходит для первых монет.</p></div><button class="btn btn-soft" data-tab="market">В магазин →</button></div></div>
+      </section>
+
+      <section id="page-market" class="page">
+        <div class="page-title-row"><div><div class="section-kicker">СЕМЕНА И ИНСТРУМЕНТЫ</div><h1>Фермерский рынок</h1><p>Покупай семена, выбирай выгодные культуры и планируй следующий урожай.</p></div></div>
+        <div id="marketGrid" class="market-grid"></div>
+        <div class="card" style="margin-top:14px"><h3>💡 Совет опытного фермера</h3><p class="card-sub">Чем дольше растёт культура, тем выше цена её урожая. Сначала используй морковь, чтобы накопить монеты, а затем попробуй клубнику и тыкву.</p></div>
+      </section>
+
+      <section id="page-quests" class="page">
+        <div class="page-title-row"><div><div class="section-kicker">ДЕЛА НА СЕГОДНЯ</div><h1>Задания фермера</h1><p>Выполняй небольшие цели, получай монеты и опыт. Прогресс сохраняется вместе с фермой.</p></div></div>
+        <div id="questsGrid" class="quest-list"></div>
+      </section>
+
+      <section id="page-neighbours" class="page">
+        <div class="page-title-row"><div><div class="section-kicker">СООБЩЕСТВО</div><h1>Фермеры рядом</h1><p>Загляни в гости и посмотри, что растёт у других игроков.</p></div><button id="refreshPlayersBtn" class="btn btn-outline">↻ Обновить</button></div>
+        <div id="onlinePlayers" class="online-list"></div>
+        <div id="noOnlinePlayers" class="empty-state hidden"><div class="big">🌱</div><h3>Пока тихо на полях</h3><p>Список показывает фермеров, которые недавно были в игре. Поделись страницей с друзьями, чтобы они основали свои фермы.</p></div>
+      </section>
+    </main>
+
+    <aside class="rightbar">
+      <div class="card weather-card"><div class="weather-top"><div><div class="section-kicker">НА ФЕРМЕ</div><h3>Погода сегодня</h3></div><div class="weather-emoji">☀️</div></div><div class="weather-meta" style="margin-top:13px"><strong>+21°</strong><div><small>Солнечно</small><small>Отлично для посадки</small></div></div></div>
+      <div class="card"><div class="small-card-head"><h3>📋 Цели дня</h3><button class="text-link" data-tab="quests">Все →</button></div><div id="miniQuests"></div></div>
+      <div class="card"><div class="small-card-head"><h3>🌐 Сейчас онлайн</h3><button class="text-link" data-tab="neighbours">Все →</button></div><div id="miniOnline"></div></div>
+      <div class="card" style="background:#edf6e7"><h3>🌳 Расти вместе с фермой</h3><p class="card-sub">За посадку и сбор урожая получай XP. Новый уровень открывает дополнительные грядки.</p><div class="level-line" style="background:#d5e6cf"><span id="rightXpBar" style="width:0%;background:#53a05a"></span></div><div class="level-info" style="color:#60745e"><span id="rightLevelLabel">Уровень 1</span><span id="rightXpLabel">0 / 100</span></div></div>
+    </aside>
+  </div>
+</section>
+
+<div id="modalBackdrop" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><div class="modal-head"><div><h2 id="modalTitle">Ферма игрока</h2><p id="modalSubtitle">Небольшая прогулка по соседству</p></div><button id="closeModalBtn" class="close-modal" aria-label="Закрыть">×</button></div><div id="modalBody"></div><div class="modal-foot"><button id="closeModalBtn2" class="btn btn-outline">Закрыть</button></div></div></div>
+<div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+<script>
+(() => {
+  'use strict';
+  // Для работы с указанной Firebase RTDB достаточно URL, если её Rules разрешают доступ к /farmGame/v1.
+  // Никнейм здесь НЕ является защищённой учётной записью. Для публичной игры включите Firebase Auth и UID-based rules.
+  const FIREBASE_URL = 'https://kastarsky-71911-default-rtdb.firebaseio.com';
+  const DB_ROOT = FIREBASE_URL + '/farmGame/v1';
+  const SAVE_VERSION = 1;
+  const CROPS = {
+    carrot: {name:'Морковь', emoji:'🥕', seedPrice:5, sellPrice:12, seconds:18, description:'Быстро растёт и помогает сделать первые накопления.', color:'#e9a65c', xp:12},
+    wheat: {name:'Пшеница', emoji:'🌾', seedPrice:9, sellPrice:21, seconds:38, description:'Надёжная культура с хорошей прибылью.', color:'#e1c45e', xp:16},
+    corn: {name:'Кукуруза', emoji:'🌽', seedPrice:15, sellPrice:35, seconds:62, description:'Крупный урожай для растущего хозяйства.', color:'#edcf50', xp:20},
+    strawberry: {name:'Клубника', emoji:'🍓', seedPrice:22, sellPrice:52, seconds:95, description:'Сочная ягода, которая стоит ожидания.', color:'#e88288', xp:24},
+    pumpkin: {name:'Тыква', emoji:'🎃', seedPrice:30, sellPrice:78, seconds:135, description:'Долго зреет, зато приносит много монет.', color:'#ef9b4c', xp:30}
+  };
+  const QUESTS = [
+    {id:'harvest3',icon:'🧺',title:'Первый запас',desc:'Собери урожай 3 раза.',target:3,metric:'harvested',coins:35,xp:20},
+    {id:'plant5',icon:'🌱',title:'Зелёные пальчики',desc:'Посади 5 культур на грядках.',target:5,metric:'planted',coins:25,xp:18},
+    {id:'earn100',icon:'🪙',title:'Копилка растёт',desc:'Заработай 100 монет за урожай.',target:100,metric:'coinsEarned',coins:45,xp:25}
+  ];
+  const $ = id => document.getElementById(id);
+  let nickname = '';
+  let userId = '';
+  let farm = null;
+  let selectedCrop = 'carrot';
+  let currentTab = 'farm';
+  let remoteAvailable = false;
+  let remoteReadOK = false;
+  let lastRemoteError = '';
+  let otherPlayers = [];
+  let saveChain = Promise.resolve();
+  let tickHandle = null;
+  let pollHandle = null;
+  let presenceHandle = null;
+  let modalFarm = null;
+  let toastTimer = null;
+
+  function slugify(value) {
+    return value.trim().toLocaleLowerCase('ru-RU').replace(/\s+/g,'-').replace(/[.#$\[\]\/]/g,'').replace(/[^\p{L}\p{N}_-]/gu,'').slice(0,36);
+  }
+  function escapeHTML(value) {
+    return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  }
+  function localFarmKey(id){ return `greenEdgeFarm:${SAVE_VERSION}:${id}`; }
+  function loadLocalFarm(id){ try { const raw=localStorage.getItem(localFarmKey(id)); return raw ? normalizeFarm(JSON.parse(raw)) : null; } catch { return null; } }
+  function storeLocalFarm(){ if (farm && userId) { try { localStorage.setItem(localFarmKey(userId),JSON.stringify(farm)); } catch {} } }
+  function normalizeFarm(raw){
+    if(!raw || typeof raw!=='object') return null;
+    const normalized = {
+      version:SAVE_VERSION, nickname:String(raw.nickname||nickname||'Фермер'), farmName:String(raw.farmName||'Зелёная долина'),
+      createdAt:Number(raw.createdAt)||Date.now(), updatedAt:Number(raw.updatedAt)||Date.now(), coins:Math.max(0,Number(raw.coins)||0), xp:Math.max(0,Number(raw.xp)||0),
+      seeds:{carrot:6,wheat:3, ...((raw.seeds&&typeof raw.seeds==='object')?raw.seeds:{})},
+      plots:Array.from({length:12},(_,i)=>{
+        const p=raw.plots && raw.plots[i];
+        if(!p || !CROPS[p.crop]) return null;
+        return {crop:p.crop,plantedAt:Number(p.plantedAt)||Date.now(),readyAt:Number(p.readyAt)||Date.now()};
+      }),
+      stats:{harvested:0,planted:0,coinsEarned:0,...((raw.stats&&typeof raw.stats==='object')?raw.stats:{})},
+      quests: (raw.quests&&typeof raw.quests==='object')?raw.quests:{}, lastBonusAt:Number(raw.lastBonusAt)||0
+    };
+    Object.keys(CROPS).forEach(key=>normalized.seeds[key]=Math.max(0,Math.floor(Number(normalized.seeds[key])||0)));
+    normalized.coins=Math.floor(normalized.coins); normalized.xp=Math.floor(normalized.xp);
+    return normalized;
+  }
+  function newFarm(name){
+    const now=Date.now();
+    return {version:SAVE_VERSION,nickname,farmName:name.trim().slice(0,28)||'Зелёная долина',createdAt:now,updatedAt:now,coins:100,xp:0,seeds:{carrot:6,wheat:3,corn:0,strawberry:0,pumpkin:0},plots:Array.from({length:12},()=>null),stats:{harvested:0,planted:0,coinsEarned:0},quests:{},lastBonusAt:0};
+  }
+  function level(){ return Math.floor((farm?.xp||0)/100)+1; }
+  function xpProgress(){ return (farm?.xp||0)%100; }
+  function unlockedPlots(){ return Math.min(12,6+(level()-1)*2); }
+  function formatDuration(seconds){
+    seconds=Math.max(0,Math.ceil(seconds));
+    if(seconds<60) return `${seconds}с`;
+    return `${Math.floor(seconds/60)}м ${String(seconds%60).padStart(2,'0')}с`;
+  }
+  function timeLeft(plot){ return Math.max(0,Math.ceil((plot.readyAt-Date.now())/1000)); }
+  function isReady(plot){ return !!plot && plot.readyAt<=Date.now(); }
+  function saveFarm(){
+    if(!farm||!userId) return;
+    farm.updatedAt=Date.now();
+    storeLocalFarm();
+    if(!remoteAvailable) return;
+    const snapshot=JSON.parse(JSON.stringify(farm));
+    saveChain=saveChain.then(()=>dbRequest(`farms/${userId}`,'PUT',snapshot)).catch(err=>{ setRemoteFailure(err); });
+  }
+  function setRemoteFailure(err){
+    lastRemoteError=(err&&err.message)||'Ошибка соединения';
+    remoteAvailable=false;
+    updateServerState();
+    $('syncWarningText').textContent = /401|403|Permission denied|permission_denied/i.test(lastRemoteError)
+      ? 'Firebase отклонила чтение или запись. Проверь раздел Realtime Database → Rules. Игра продолжит сохраняться на этом устройстве.'
+      : 'Не удалось связаться с Firebase. Игра продолжит сохраняться на этом устройстве; проверь интернет и обнови страницу для повторной попытки.';
+    $('syncWarning').classList.remove('hidden');
+  }
+  async function dbRequest(path, method='GET', body=undefined){
+    const encoded=path.split('/').map(part=>encodeURIComponent(part)).join('/');
+    const options={method,cache:'no-store',headers:{}};
+    if(body!==undefined){ options.headers['Content-Type']='application/json'; options.body=JSON.stringify(body); }
+    let response;
+    try { response=await fetch(`${DB_ROOT}/${encoded}.json`,options); }
+    catch(err){ throw new Error('Нет соединения с Firebase.'); }
+    let data=null;
+    try { data=await response.json(); } catch {}
+    if(!response.ok || (data && typeof data==='object' && data.error)){
+      const message=(data&&data.error)||`HTTP ${response.status}`;
+      throw new Error(`${message} (${response.status})`);
+    }
+    return data;
+  }
+  async function checkConnection(){
+    $('connectionText').textContent='Проверяем соединение с сервером…';
+    $('loginDot').className='dot';
+    try {
+      await dbRequest('presence','GET');
+      remoteReadOK=true;
+      $('connectionText').textContent='Firebase доступна · проверим права записи при входе';
+      $('loginDot').className='dot good';
+    } catch(err) {
+      remoteReadOK=false; remoteAvailable=false; lastRemoteError=err.message;
+      $('connectionText').textContent='Пока локальный режим · проверь настройки базы Firebase';
+      $('loginDot').className='dot bad';
+    }
+  }
+  function updateServerState(){
+    const online=remoteAvailable;
+    $('serverDot').className='dot '+(online?'good':'bad');
+    $('serverLabel').textContent=online?'Firebase онлайн':'Локальный режим';
+    $('serverPill').title=online?'Ферма синхронизируется через Firebase':'Сохранение только на этом устройстве';
+    if(!online && farm) $('syncWarning').classList.remove('hidden');
+    else $('syncWarning').classList.add('hidden');
+  }
+  async function loginWithNickname(input){
+    const clean=input.trim();
+    if(!/^[\p{L}\p{N}_-]{3,16}$/u.test(clean)){
+      toast('Ник должен содержать 3–16 символов: буквы, цифры, «_» или «-».','error'); return;
+    }
+    nickname=clean; userId=slugify(clean);
+    if(!userId){toast('Не получилось обработать этот ник. Попробуй другой.','error');return;}
+    $('loginScreen').classList.add('hidden');
+    $('setupScreen').classList.add('hidden');
+    $('gameScreen').classList.add('hidden');
+    // Повторяем проверку, чтобы после изменения Rules можно было вернуться из локального режима.
+    await checkConnection();
+    let cloudFarm=null;
+    if(remoteReadOK){
+      try {
+        cloudFarm=await dbRequest(`farms/${userId}`,'GET');
+        remoteAvailable=true;
+      } catch(err) { setRemoteFailure(err); }
+    }
+    if(cloudFarm){
+      farm=normalizeFarm(cloudFarm);
+      farm.nickname=clean;
+      storeLocalFarm();
+    } else {
+      farm=loadLocalFarm(userId);
+      if(farm) farm.nickname=clean;
+    }
+    $('headerNick').textContent=clean;
+    $('setupNick').textContent=clean;
+    $('farmNameInput').value=`Ферма ${clean}`.slice(0,28);
+    if(farm){
+      $('gameScreen').classList.remove('hidden');
+      if(remoteAvailable){
+        try { await publishPresence(); }
+        catch(err){setRemoteFailure(err);}
+      }
+      startGameLoops(); renderAll();
+      if(!remoteAvailable) $('syncWarning').classList.remove('hidden');
+    } else {
+      $('setupScreen').classList.remove('hidden');
+      if(!remoteAvailable) toast('Можно начать играть, но пока сохранение будет только на этом устройстве.','error');
+    }
+  }
+  async function publishPresence(){
+    if(!remoteAvailable||!farm) return;
+    await dbRequest(`presence/${userId}`,'PUT',{nickname,farmName:farm.farmName,level:level(),lastSeen:Date.now()});
+  }
+  async function createFarm(evt){
+    evt.preventDefault();
+    const name=$('farmNameInput').value.trim().slice(0,28);
+    if(name.length<2){toast('Название фермы должно содержать хотя бы 2 символа.','error');return;}
+    farm=newFarm(name);
+    $('setupScreen').classList.add('hidden');$('gameScreen').classList.remove('hidden');
+    $('syncWarning').classList.toggle('hidden',remoteAvailable);
+    saveFarm();
+    if(remoteAvailable){
+      try { await publishPresence(); }
+      catch(err){setRemoteFailure(err);}
+    }
+    startGameLoops();renderAll();toast(`Ферма «${name}» основана! Получи первый урожай. 🥕`,'success');
+  }
+  function startGameLoops(){
+    clearInterval(tickHandle);clearInterval(pollHandle);clearInterval(presenceHandle);
+    tickHandle=setInterval(()=>{ if(farm){renderFarmPlots();renderSeedPicker();renderRightStats();} },1000);
+    pollHandle=setInterval(refreshPlayers,7000);
+    presenceHandle=setInterval(async()=>{ if(remoteAvailable&&farm){try{await publishPresence();}catch(err){setRemoteFailure(err);}} },12000);
+    refreshPlayers();
+  }
+  function stopGameLoops(){clearInterval(tickHandle);clearInterval(pollHandle);clearInterval(presenceHandle);tickHandle=pollHandle=presenceHandle=null;}
+  async function refreshPlayers(){
+    if(!farm) return;
+    if(!remoteAvailable){renderPlayers();return;}
+    try{
+      const data=await dbRequest('presence','GET');
+      const now=Date.now();
+      otherPlayers=Object.entries(data||{}).filter(([id,p])=>id!==userId&&p&&now-(Number(p.lastSeen)||0)<40000&&typeof p.nickname==='string').map(([id,p])=>({id,nickname:p.nickname,farmName:p.farmName||`Ферма ${p.nickname}`,level:Number(p.level)||1,lastSeen:Number(p.lastSeen)||0})).sort((a,b)=>b.level-a.level||a.nickname.localeCompare(b.nickname,'ru'));
+      $('navOnlineCount').textContent=otherPlayers.length?String(otherPlayers.length):'';
+      renderPlayers();
+    }catch(err){setRemoteFailure(err);renderPlayers();}
+  }
+  function toast(message,type=''){ 
+    const node=document.createElement('div');node.className='toast '+type;node.textContent=message;$('toastContainer').appendChild(node);
+    setTimeout(()=>{node.style.opacity='0';node.style.transform='translateY(6px)';setTimeout(()=>node.remove(),180);},3300);
+  }
+  function addXp(amount){ farm.xp+=amount; }
+  function renderAll(){
+    if(!farm)return;
+    $('headerNick').textContent=nickname;$('coinCount').textContent=farm.coins.toLocaleString('ru-RU');$('levelCount').textContent=`${level()} ур.`;
+    $('sidebarFarmName').textContent=farm.farmName;$('sidebarFarmOwner').textContent=`Фермер: ${nickname}`;
+    $('welcomeTitle').textContent=`Привет, ${nickname}!`;$('welcomeSubtitle').textContent=`${farm.farmName} процветает — пора проверить грядки.`;
+    $('farmTitle').textContent=farm.farmName;
+    $('sidebarLevel').textContent=`Уровень ${level()}`;$('sidebarXp').textContent=`${xpProgress()} / 100 XP`;$('sidebarXpBar').style.width=`${xpProgress()}%`;
+    $('rightLevelLabel').textContent=`Уровень ${level()}`;$('rightXpLabel').textContent=`${xpProgress()} / 100`;$('rightXpBar').style.width=`${xpProgress()}%`;
+    const bonusAvailable=Date.now()-farm.lastBonusAt>=24*60*60*1000;
+    $('dailyBonusBtn').disabled=!bonusAvailable;$('dailyBonusBtn').className='btn '+(bonusAvailable?'btn-gold':'btn-outline');
+    $('dailyBonusNote').textContent=bonusAvailable?'Ежедневный подарок: +35 монет и +12 XP.':'Бонус получен — возвращайся завтра за новым подарком.';
+    renderSeedPicker();renderFarmPlots();renderMarket();renderQuests();renderPlayers();renderRightStats();updateServerState();
+  }
+  function renderRightStats(){
+    if(!farm)return;
+    $('coinCount').textContent=farm.coins.toLocaleString('ru-RU');$('levelCount').textContent=`${level()} ур.`;
+    $('sidebarLevel').textContent=`Уровень ${level()}`;$('sidebarXp').textContent=`${xpProgress()} / 100 XP`;$('sidebarXpBar').style.width=`${xpProgress()}%`;
+    $('rightLevelLabel').textContent=`Уровень ${level()}`;$('rightXpLabel').textContent=`${xpProgress()} / 100`;$('rightXpBar').style.width=`${xpProgress()}%`;
+  }
+  function renderSeedPicker(){
+    if(!farm)return;
+    $('seedPicker').innerHTML=Object.entries(CROPS).map(([key,c])=>`<button class="seed-choice ${selectedCrop===key?'selected':''}" data-action="select-crop" data-crop="${key}"><span>${c.emoji}</span><span>${c.name}</span><span class="seed-count">${farm.seeds[key]||0}</span></button>`).join('');
+  }
+  function renderFarmPlots(){
+    if(!farm)return;
+    const unlocked=unlockedPlots();
+    $('plotCountLabel').textContent=`${unlocked} из 12 грядок открыто`;
+    $('plotsGrid').innerHTML=farm.plots.map((plot,index)=>{
+      const locked=index>=unlocked;
+      if(locked){const required=Math.floor((index-6)/2)+2;return `<button class="plot locked" data-action="locked-plot" data-index="${index}"><span class="plant">🔒</span><span class="plot-title">Закрыто</span><span class="plot-help">Уровень ${required}</span></button>`;}
+      if(!plot){const crop=CROPS[selectedCrop];return `<button class="plot empty" data-action="plot" data-index="${index}"><span class="plant">＋</span><span class="plot-title">Свободная грядка</span><span class="plot-help">${escapeHTML(crop.name)} × ${farm.seeds[selectedCrop]||0}</span></button>`;}
+      const crop=CROPS[plot.crop];
+      if(isReady(plot))return `<button class="plot ready" data-action="plot" data-index="${index}"><span class="plant">${crop.emoji}</span><span class="plot-title">${crop.name}</span><span class="plot-help">✨ Собрать урожай</span></button>`;
+      const total=Math.max(1,plot.readyAt-plot.plantedAt);const progress=Math.min(100,Math.max(0,((Date.now()-plot.plantedAt)/total)*100));
+      return `<button class="plot" data-action="plot" data-index="${index}"><span class="plant">🌱</span><span class="plot-title">${crop.name}</span><div class="progress"><span style="width:${progress}%"></span></div><span class="plot-help">Ещё ${formatDuration(timeLeft(plot))}</span></button>`;
+    }).join('');
+  }
+  function renderMarket(){
+    if(!farm)return;
+    $('marketGrid').innerHTML=Object.entries(CROPS).map(([key,c])=>`<article class="market-card"><div class="market-card-head"><div class="crop-visual" style="background:${c.color}28">${c.emoji}</div><div style="text-align:right"><div class="owned-label">На складе</div><strong style="font-size:16px">× ${farm.seeds[key]||0}</strong></div></div><div class="crop-name">${c.name}</div><div class="crop-desc">${c.description}</div><div class="crop-stats"><div><span>Цена семян</span><strong>🪙 ${c.seedPrice}</strong></div><div><span>Продажа урожая</span><strong>🪙 ${c.sellPrice}</strong></div><div><span>Рост</span><strong>⏱ ${formatDuration(c.seconds)}</strong></div></div><div class="market-bottom"><span class="owned-label">+${c.xp} XP за сбор</span><button class="btn btn-primary" data-action="buy-seed" data-crop="${key}">Купить · ${c.seedPrice} 🪙</button></div></article>`).join('');
+  }
+  function getQuestProgress(q){return Math.min(q.target,Math.max(0,Number(farm.stats[q.metric])||0));}
+  function questClaimed(id){return !!(farm.quests[id]&&farm.quests[id].claimed);}
+  function questDone(q){return getQuestProgress(q)>=q.target;}
+  function claimQuest(q){
+    if(questClaimed(q.id)||!questDone(q))return;
+    farm.quests[q.id]={claimed:true,claimedAt:Date.now()};farm.coins+=q.coins;addXp(q.xp);saveFarm();renderAll();toast(`Задание «${q.title}» выполнено: +${q.coins} монет и +${q.xp} XP!`,'success');
+  }
+  function questMarkup(q,mini=false){
+    const current=getQuestProgress(q),done=questDone(q),claimed=questClaimed(q.id),pct=Math.min(100,current/q.target*100);
+    if(mini)return `<div class="mini-quest"><strong><span>${q.icon} ${q.title}</span><span>${current}/${q.target}</span></strong><small>${claimed?'Награда получена':done?'Готово к получению':q.desc}</small><div class="mini-progress"><span style="width:${pct}%"></span></div></div>`;
+    return `<article class="quest-card"><div class="quest-emoji">${q.icon}</div><div class="quest-info"><h3>${q.title}</h3><p>${q.desc}</p><div class="quest-meta"><span>Прогресс: ${current} / ${q.target}</span><span>🪙 ${q.coins} · ⭐ ${q.xp} XP</span></div><div class="mini-progress"><span style="width:${pct}%"></span></div></div><button class="btn ${claimed?'btn-outline':done?'btn-primary':'btn-soft'}" data-action="claim-quest" data-quest="${q.id}" ${claimed||!done?'disabled':''}>${claimed?'Получено':done?'Забрать':'В процессе'}</button></article>`;
+  }
+  function renderQuests(){if(!farm)return;$('questsGrid').innerHTML=QUESTS.map(q=>questMarkup(q)).join('');$('miniQuests').innerHTML=QUESTS.slice(0,2).map(q=>questMarkup(q,true)).join('');}
+  function renderPlayers(){
+    $('navOnlineCount').textContent=otherPlayers.length?String(otherPlayers.length):'';
+    $('miniOnline').innerHTML=otherPlayers.length?otherPlayers.slice(0,3).map(p=>`<div class="mini-online"><div class="online-avatar">🧑‍🌾</div><div class="mini-online-name"><strong>${escapeHTML(p.nickname)}</strong><small>Уровень ${p.level}</small></div><span class="tiny-dot"></span></div>`).join(''):`<p class="card-sub">Пока никого нет. Позови друзей!</p>`;
+    $('onlinePlayers').innerHTML=otherPlayers.map(p=>`<div class="player-row"><div class="online-avatar">🧑‍🌾</div><div class="mini-online-name"><strong>${escapeHTML(p.nickname)}</strong><small>${escapeHTML(p.farmName)} · уровень ${p.level}</small></div><span class="tiny-dot" title="Недавно был онлайн"></span><button class="btn btn-soft" data-action="visit-player" data-id="${escapeHTML(p.id)}">В гости ↗</button></div>`).join('');
+    $('noOnlinePlayers').classList.toggle('hidden',otherPlayers.length>0);
+  }
+  function handlePlot(index){
+    if(index>=unlockedPlots()) {const req=Math.floor((index-6)/2)+2;toast(`Эта грядка откроется на ${req} уровне.`);return;}
+    const plot=farm.plots[index];
+    if(!plot){
+      const crop=CROPS[selectedCrop];
+      if((farm.seeds[selectedCrop]||0)<1){toast(`Семена «${crop.name.toLowerCase()}» закончились. Загляни в магазин.`,'error');return;}
+      farm.seeds[selectedCrop]--;const now=Date.now();farm.plots[index]={crop:selectedCrop,plantedAt:now,readyAt:now+crop.seconds*1000};farm.stats.planted=(Number(farm.stats.planted)||0)+1;addXp(5);saveFarm();renderAll();toast(`${crop.emoji} ${crop.name} посажена. Урожай будет готов через ${formatDuration(crop.seconds)}.`,'success');return;
+    }
+    if(!isReady(plot)){toast(`${CROPS[plot.crop].name} ещё растёт — осталось ${formatDuration(timeLeft(plot))}.`);return;}
+    const crop=CROPS[plot.crop];farm.coins+=crop.sellPrice;farm.stats.harvested=(Number(farm.stats.harvested)||0)+1;farm.stats.coinsEarned=(Number(farm.stats.coinsEarned)||0)+crop.sellPrice;addXp(crop.xp);farm.plots[index]=null;saveFarm();renderAll();toast(`Урожай собран! +${crop.sellPrice} монет и +${crop.xp} XP.`,'success');
+  }
+  function buySeed(key){
+    const c=CROPS[key];if(!c)return;
+    if(farm.coins<c.seedPrice){toast(`Не хватает монет. Нужно ещё ${c.seedPrice-farm.coins}.`,'error');return;}
+    farm.coins-=c.seedPrice;farm.seeds[key]=(farm.seeds[key]||0)+1;selectedCrop=key;saveFarm();renderAll();toast(`Куплено: 1 пакет семян «${c.name}».`,'success');
+  }
+  function collectDailyBonus(){
+    if(Date.now()-farm.lastBonusAt<24*60*60*1000){toast('Бонус уже получен. Загляни завтра!');return;}
+    farm.lastBonusAt=Date.now();farm.coins+=35;addXp(12);saveFarm();renderAll();toast('Ежедневный бонус: +35 монет и +12 XP!','success');
+  }
+  function showTab(tab){
+    if(!['farm','market','quests','neighbours'].includes(tab))return;
+    currentTab=tab;
+    document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===`page-${tab}`));
+    document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+    if(tab==='neighbours')refreshPlayers();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  async function visitPlayer(id){
+    const player=otherPlayers.find(p=>p.id===id);if(!player)return;
+    if(!remoteAvailable){toast('Гости доступны после подключения Firebase.','error');return;}
+    try{
+      const data=await dbRequest(`farms/${id}`,'GET');
+      if(!data){toast('Ферма не найдена — возможно, игрок уже вышел.');refreshPlayers();return;}
+      modalFarm={profile:player,farm:normalizeFarm(data)};renderVisitorModal();$('modalBackdrop').classList.remove('hidden');
+    }catch(err){setRemoteFailure(err);toast('Не удалось открыть ферму. Проверь доступ к базе Firebase.','error');}
+  }
+  function renderVisitorModal(){
+    if(!modalFarm)return;
+    const f=modalFarm.farm,p=modalFarm.profile;
+    $('modalTitle').textContent=f.farmName;$('modalSubtitle').textContent=`Фермер ${p.nickname} · уровень ${Math.floor(f.xp/100)+1} · 🪙 ${f.coins}`;
+    $('modalBody').innerHTML=`<div class="visitor-grid">${f.plots.map((plot,i)=>{if(i>=(6+(Math.floor(f.xp/100))*2>12?12:6+Math.floor(f.xp/100)*2))return `<div class="visitor-plot empty"><span>🔒</span><small>Закрыто</small></div>`;if(!plot)return `<div class="visitor-plot empty"><span>＋</span><small>Пусто</small></div>`;const c=CROPS[plot.crop];return `<div class="visitor-plot ${isReady(plot)?'ready':''}"><span>${isReady(plot)?c.emoji:'🌱'}</span><small>${isReady(plot)?'Готово':`${c.name} · ${formatDuration(timeLeft(plot))}`}</small></div>`;}).join('')}</div><p class="card-sub" style="margin-top:17px">Гости могут только смотреть на поля. Каждый фермер управляет собственным урожаем.</p>`;
+  }
+  function closeModal(){$('modalBackdrop').classList.add('hidden');modalFarm=null;}
+  document.addEventListener('click',evt=>{
+    const tab=evt.target.closest('[data-tab]');if(tab){showTab(tab.dataset.tab);return;}
+    const btn=evt.target.closest('[data-action]');if(!btn||!farm)return;
+    const action=btn.dataset.action;
+    if(action==='select-crop'){if(!CROPS[btn.dataset.crop])return;selectedCrop=btn.dataset.crop;renderSeedPicker();renderFarmPlots();}
+    else if(action==='plot')handlePlot(Number(btn.dataset.index));
+    else if(action==='locked-plot')handlePlot(Number(btn.dataset.index));
+    else if(action==='buy-seed')buySeed(btn.dataset.crop);
+    else if(action==='claim-quest'){const q=QUESTS.find(q=>q.id===btn.dataset.quest);if(q)claimQuest(q);}
+    else if(action==='visit-player')visitPlayer(btn.dataset.id);
+  });
+  $('loginForm').addEventListener('submit',evt=>{evt.preventDefault();loginWithNickname($('nicknameInput').value);});
+  $('createFarmForm').addEventListener('submit',createFarm);
+  $('backToLogin').addEventListener('click',()=>{$('setupScreen').classList.add('hidden');$('loginScreen').classList.remove('hidden');});
+  $('dailyBonusBtn').addEventListener('click',collectDailyBonus);
+  $('logoutBtn').addEventListener('click',()=>{
+    if(userId&&remoteAvailable)dbRequest(`presence/${userId}`,'DELETE').catch(()=>{});
+    stopGameLoops();nickname='';userId='';farm=null;otherPlayers=[];remoteAvailable=false;$('gameScreen').classList.add('hidden');$('setupScreen').classList.add('hidden');$('loginScreen').classList.remove('hidden');$('nicknameInput').value='';checkConnection();
+  });
+  $('refreshPlayersBtn').addEventListener('click',()=>refreshPlayers().then(()=>toast('Список фермеров обновлён.')));
+  $('closeModalBtn').addEventListener('click',closeModal);$('closeModalBtn2').addEventListener('click',closeModal);
+  $('modalBackdrop').addEventListener('click',evt=>{if(evt.target===$('modalBackdrop'))closeModal();});
+  document.addEventListener('keydown',evt=>{if(evt.key==='Escape')closeModal();});
+  window.addEventListener('beforeunload',()=>{if(userId&&remoteAvailable){const url=`${DB_ROOT}/presence/${encodeURIComponent(userId)}.json`;fetch(url,{method:'DELETE',keepalive:true}).catch(()=>{});}});
+  checkConnection();
+})();
+</script>
+</body>
+</html>
